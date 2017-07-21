@@ -1,2 +1,2 @@
-# Angular-2---Fundamentals
+# Angular2-Fundamentals
 SoftUni JS Web module
