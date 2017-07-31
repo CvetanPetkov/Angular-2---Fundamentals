@@ -20,7 +20,7 @@ import {ActivatedRoute} from '@angular/router';
       <div>Created on: {{car.createdOn | date:"dd/MM/yyyy"}}</div>
       <hr />
       <p>Comments:</p>
-      <div class='comments-block' *ngIf='car.comments.length > 0'>
+      <div class='comments-block'>
         <p *ngFor='let comment of car.comments'>
           {{comment}}
         </p>
@@ -54,6 +54,7 @@ import {ActivatedRoute} from '@angular/router';
   `]
 })
 
+// TODO implement interface for car to stop the error
 export class CarIdComponent implements OnInit {
   car: any;
   id: any;
@@ -66,6 +67,11 @@ export class CarIdComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.car = this.dataService.getCarById(this.id);
+    this.dataService
+      .getCarById(this.id)
+      .then((data) => {
+        this.car = data;
+      })
+      .catch(err => console.log(err));
   }
 }

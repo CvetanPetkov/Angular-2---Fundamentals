@@ -33,6 +33,7 @@ import {DataService} from '../../services/data.service';
   `]
 })
 
+// TODO implement interface for owner to stop the error
 export class OwnerIdComponent implements OnInit {
   owner: any;
   id: any;
@@ -45,6 +46,11 @@ export class OwnerIdComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.owner = this.dataService.getOwnerById(this.id);
+    this.dataService
+      .getOwnerById(this.id)
+      .then((data) => {
+        this.owner = data;
+      })
+      .catch(err => console.log(err));
   }
 }

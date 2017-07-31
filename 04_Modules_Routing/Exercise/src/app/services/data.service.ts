@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import 'rxjs/add/operator/toPromise';
-//  import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/map';
+import {reject} from 'q';
 
 const DATA = {
   cars: [
@@ -216,19 +216,40 @@ export class DataService {
   }
 
   getCarsAll() {
-    //  return (this.data.cars).toPromise();
-    return this.data.cars;
+    return new Promise((resolve, reject) => {
+      resolve(this.data.cars);
+    });
   }
 
   getCarById(id) {
-    return this.data.cars[id];
+    let car = {};
+    this.data.cars.map((c) => {
+      if (c.id === Number(id)) {
+        car = c;
+      }
+    });
+
+    return new Promise((resolve, reject) => {
+      resolve(car);
+    });
   }
 
   getOwnersAll() {
-    return this.data.owners;
+    return new Promise((resolve, reject) => {
+      resolve(this.data.owners);
+    });
   }
 
   getOwnerById(id) {
-    return this.data.owners[id];
+    let owner = {};
+    this.data.owners.map((o) => {
+      if (o.id === Number(id)) {
+        owner = o;
+      }
+    });
+
+    return new Promise((resolve, reject) => {
+      resolve(owner);
+    });
   }
 }

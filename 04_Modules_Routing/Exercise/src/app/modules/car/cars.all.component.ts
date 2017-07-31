@@ -53,8 +53,12 @@ export class CarsAllComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cars = this.dataService
-      .getCarsAll();
+    this.dataService
+      .getCarsAll()
+      .then((data) => {
+        this.cars = data;
+      })
+      .catch(err => console.log(err));
   }
 
   orderByDateAsc() {

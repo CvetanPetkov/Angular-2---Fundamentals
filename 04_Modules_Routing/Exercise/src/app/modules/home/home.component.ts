@@ -5,7 +5,7 @@ import {DataService} from '../../services/data.service';
   selector: 'app-home',
   template: `
     <div class='home-car-card' *ngFor='let car of cars'>
-      <img class='img' [src]='car.image'/>
+      <img class='img' [src]='car.image' />
       <div class='make'>Make: {{car.make}}</div>
       <hr />
       <div class='model'>Model: {{car.model}}</div>
@@ -22,14 +22,15 @@ import {DataService} from '../../services/data.service';
       overflow: hidden;
       font-size: 18px;
     }
+
     .img {
       width: 60%;
       float: left;
       margin: 30px;
       border-radius: 25px;
-      -webkit-box-shadow: 0px 0px 45px 0px rgba(107,107,107,1);
-      -moz-box-shadow: 0px 0px 45px 0px rgba(107,107,107,1);
-      box-shadow: 0px 0px 45px 0px rgba(107,107,107,1);
+      -webkit-box-shadow: 0px 0px 45px 0px rgba(107, 107, 107, 1);
+      -moz-box-shadow: 0px 0px 45px 0px rgba(107, 107, 107, 1);
+      box-shadow: 0px 0px 45px 0px rgba(107, 107, 107, 1);
     }
   `]
 })
@@ -41,9 +42,14 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cars = this.dataService
+    this.dataService
       .getCarsAll()
-      .slice(0, 6)
-      .sort((a, b) => b.createdOn - a.createdOn);
+      .then((data) => {
+        this.cars = data;
+        let cars = this.cars;
+        cars = cars.slice(0, 6).sort((a, b) => b.createdOn - a.createdOn);
+        this.cars = cars;
+      })
+      .catch(err => console.log(err));
   }
 }

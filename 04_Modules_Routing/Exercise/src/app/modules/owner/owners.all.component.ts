@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
+import {of} from 'rxjs/observable/of';
 
 @Component({
   selector: 'app-owners-all',
@@ -49,8 +50,12 @@ export class OwnersAllComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.owners = this.dataService
-      .getOwnersAll();
+    this.dataService
+      .getOwnersAll()
+      .then((data) => {
+        this.owners = data;
+      })
+      .catch(err => console.log(err));
   }
 
   orderByNameAsc() {
