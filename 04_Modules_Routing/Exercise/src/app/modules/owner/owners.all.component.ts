@@ -59,10 +59,10 @@ export class OwnersAllComponent implements OnInit {
   }
 
   orderByNameAsc() {
-    this.owners.sort((a, b) => a.name > b.name ? 1 : -1);
+    this.owners.sort((a, b) => a.name.localeCompare(b.name));
   }
 
   orderByNameDesc() {
-    this.owners.sort((a, b) => a.name < b.name ? 1 : -1);
+    this.owners.sort((a, b) => b.name.localeCompare(a.name));
   }
 }

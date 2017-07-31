@@ -70,10 +70,10 @@ export class CarsAllComponent implements OnInit {
   }
 
   orderByOwnAsc() {
-    this.cars.sort((a, b) => a.owner > b.owner ? 1 : -1);
+    this.cars.sort((a, b) => a.owner.localeCompare(b.owner));
   }
 
   orderByOwnDesc() {
-    this.cars.sort((a, b) => a.owner < b.owner ? 1 : -1);
+    this.cars.sort((a, b) => b.owner.localeCompare(a.owner));
   }
 }
