@@ -2,10 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {ActivatedRoute} from '@angular/router';
 
+import {Car} from '../../interfaces/car';
+
 @Component({
   selector: 'app-car-id',
   template: `
-    <div class='car-id-card'>
+    <div class='car-id-card' *ngIf='car'>
       <img class='img' [src]='car.image'/>
       <div>Make: {{car.make}}</div>
       <hr />
@@ -54,9 +56,9 @@ import {ActivatedRoute} from '@angular/router';
   `]
 })
 
-// TODO implement interface for car to stop the error
+// TODO implemented interface for car
 export class CarIdComponent implements OnInit {
-  car: any;
+  car: Car;
   id: any;
 
   constructor(

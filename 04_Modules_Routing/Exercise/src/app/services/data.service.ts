@@ -2,6 +2,9 @@ import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {reject} from 'q';
 
+import {Car} from '../interfaces/car';
+import {Owner} from '../interfaces/owner';
+
 const DATA = {
   cars: [
     {
@@ -215,13 +218,13 @@ export class DataService {
     this.data = DATA;
   }
 
-  getCarsAll() {
+  getCarsAll(): Promise<Array<Car>> {
     return new Promise((resolve, reject) => {
       resolve(this.data.cars);
     });
   }
 
-  getCarById(id) {
+  getCarById(id): Promise<Car> {
     let car = {};
     this.data.cars.map((c) => {
       if (c.id === Number(id)) {
@@ -234,13 +237,13 @@ export class DataService {
     });
   }
 
-  getOwnersAll() {
+  getOwnersAll(): Promise<Array<Owner>> {
     return new Promise((resolve, reject) => {
       resolve(this.data.owners);
     });
   }
 
-  getOwnerById(id) {
+  getOwnerById(id): Promise<Owner> {
     let owner = {};
     this.data.owners.map((o) => {
       if (o.id === Number(id)) {

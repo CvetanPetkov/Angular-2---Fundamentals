@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
-import {of} from 'rxjs/observable/of';
+
+import {Owner} from '../../interfaces/owner';
 
 @Component({
   selector: 'app-owners-all',
@@ -44,7 +45,7 @@ import {of} from 'rxjs/observable/of';
 })
 
 export class OwnersAllComponent implements OnInit {
-  owners: any;
+  owners: Array<Owner>;
 
   constructor(private dataService: DataService) {
   }

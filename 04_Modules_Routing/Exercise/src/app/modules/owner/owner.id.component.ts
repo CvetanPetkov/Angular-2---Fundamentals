@@ -2,10 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DataService} from '../../services/data.service';
 
+import {Owner} from '../../interfaces/owner';
+
 @Component({
   selector: 'app-owner-id',
   template: `
-    <div class='owners-all-card'>
+    <div class='owners-all-card' *ngIf='owner'>
       <img class='img' [src]='owner.image'/>
       <div>Name: {{owner.name}}</div>
       <hr />
@@ -35,7 +37,7 @@ import {DataService} from '../../services/data.service';
 
 // TODO implement interface for owner to stop the error
 export class OwnerIdComponent implements OnInit {
-  owner: any;
+  owner: Owner;
   id: any;
 
   constructor(

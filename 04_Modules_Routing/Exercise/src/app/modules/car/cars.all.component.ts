@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service';
 
+import {Car} from '../../interfaces/car';
+
 @Component({
   selector: 'app-cars-all',
   template: `
@@ -47,7 +49,7 @@ import {DataService} from '../../services/data.service';
 })
 
 export class CarsAllComponent implements OnInit {
-  cars: any;
+  cars: Array<Car>;
 
   constructor(private dataService: DataService) {
   }
@@ -62,11 +64,11 @@ export class CarsAllComponent implements OnInit {
   }
 
   orderByDateAsc() {
-    this.cars.sort((a, b) => a.createdOn - b.createdOn);
+    this.cars.sort((a, b) => +a.createdOn - +b.createdOn);
   }
 
   orderByDateDesc() {
-    this.cars.sort((a, b) => b.createdOn - a.createdOn);
+    this.cars.sort((a, b) => +b.createdOn - +a.createdOn);
   }
 
   orderByOwnAsc() {
